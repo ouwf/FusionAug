@@ -19,7 +19,7 @@ Python3.6, PyTorch 1.2
 
 ### Note
 The copyright of the FV-USM database is owned by Dr. Bakhtiar Affendi Rosdi,
-School of Electrical and Electronic Engineering, USM. We provide the preprocessed database here only for testing the source code. If any copyright issues are violated, please inform us to remove the database.  
+School of Electrical and Electronic Engineering, USM (http://drfendi.com/fv_usm_database/). We provide the preprocessed database here only for testing the source code. If any copyright issues are violated, please inform us to remove the database.  
 
 ### Citation
 [1] Ou Weifeng, Po Laiman, Zhou Chang, Rehman Yasar Abbas Ur, Xian Pengfei, Zhang Yujia. Fusion Loss and Inter-class Data Augmentation for Deep Finger Vein Feature Learning [J]. Expert Systems with Applications, 2021, 171(7):114584. https://doi.org/10.1016/j.eswa.2021.114584.
