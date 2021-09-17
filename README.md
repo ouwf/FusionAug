@@ -1,6 +1,6 @@
 # FusionAug - PyTorch 
 
- This source code shows how to train a feature embedding network to perform finger vein-based biometric verification, based on the paper "Fusion Loss and Inter-class Data Augmentation for Deep Finger Vein Feature Learning"
+ This source code shows how to train a feature embedding network to perform finger vein-based biometric verification, based on the paper "Fusion Loss and Inter-class Data Augmentation for Deep Finger Vein Feature Learning". Our real-time demo: https://www.youtube.com/watch?v=815MXXj2gtU.
 
 
 ### Instruction
