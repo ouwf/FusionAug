@@ -5,7 +5,7 @@
 
 ### Instruction
 1. Download the preprocessed FV-USM finger vein database:
-https://portland-my.sharepoint.com/:u:/r/personal/weifengou2-c_my_cityu_edu_hk/Documents/FingerVeinDataset/public%20databases/FVUSM/FV-USM-processed.tgz?csf=1&web=1&e=EM2B6b
+https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EYEw8-g0xZRKufJfYK9ZRwgBEtiw63dKzd60g-iJQZwpyA?e=fPITqi
 
 
 2. Run train.py by specifiying the name of the database, the dataset location, network architecture, loss function, data augmentation options, etc. 
