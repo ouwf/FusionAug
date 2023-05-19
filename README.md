@@ -4,18 +4,29 @@
 
 
 ### Instruction
-1. Download the preprocessed FV-USM finger vein database:
+1. Install the required libraries
+   ```
+   $ conda env create --name pt1.2 --file env.yml
+   $ conda activate pt1.2
+   ```
+
+2. Download the preprocessed FV-USM finger vein database:
 https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/EYEw8-g0xZRKufJfYK9ZRwgBEtiw63dKzd60g-iJQZwpyA?e=fPITqi
 
 
-2. Run train.py by specifiying the name of the database, the dataset location, network architecture, loss function, data augmentation options, etc. 
+3. Start training by specifiying the name of the database, the dataset location, network architecture, loss function, data augmentation options, etc. 
 
    #### Example 1: train with fusion loss using intra-class data augmentation and inter-class data augmentation via vertical (top-bottom) flipping.
    `python3 train.py --dataset FVUSM --data "path to your data" --pretrained --fusion --intra_aug --inter_aug "TB"`
    #### Example 2: simply run the shell script `./run.sh`
 
+
+4. Evaluate the verification performance of the provided checkpoint on the FVUSM testing set
+   
+   `python3 -u ./eval.py --ckpt "ckpt path" --dataset FVUSM --data "dataset path" --network resnet18`
+
 ### Dependencies
-Python3.6, PyTorch 1.2 
+Python3.6, PyTorch 1.2, torchvision 0.4.0
 
 ### Note
 The copyright of the FV-USM database is owned by Dr. Bakhtiar Affendi Rosdi,
