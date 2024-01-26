@@ -17,7 +17,7 @@ https://portland-my.sharepoint.com/:u:/g/personal/weifengou2-c_my_cityu_edu_hk/E
 3. Start training by specifiying the name of the database, the dataset location, network architecture, loss function, data augmentation options, etc. 
 
    #### Example 1: train with fusion loss using intra-class data augmentation and inter-class data augmentation via vertical (top-bottom) flipping.
-   `python3 train.py --dataset FVUSM --data "path to your data" --pretrained --fusion --intra_aug --inter_aug "TB"`
+   `python3 train.py --dataset FVUSM --data "path to your data" --pretrained --loss fusion --intra_aug --inter_aug "TB"`
    #### Example 2: simply run the shell script `./run.sh`
 
 
