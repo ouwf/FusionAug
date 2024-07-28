@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from losses.triplet_selector import RandomNegativeTripletSelector
+from .triplet_selector import RandomNegativeTripletSelector
 
 
 class CosFace(nn.Module):
@@ -13,7 +13,7 @@ class CosFace(nn.Module):
     def forward(self, input, labels):
         # input: size = B x num_class
         cos = input
-        one_hot = torch.zeros(cos.size()).cuda()
+        one_hot = torch.zeros_like(cos)
         one_hot = one_hot.scatter_(1, labels.view(-1, 1), 1)
         output = self.s * (cos - one_hot * self.m)
 
@@ -40,10 +40,8 @@ class OnlineTripletLoss(nn.Module):
 
     def forward(self, embeddings, target):
         embeddings_normalized = F.normalize(embeddings, p=2, dim=1)
-        triplets = self.triplet_selector.get_triplets(embeddings_normalized, target)
+        triplets = self.triplet_selector.get_triplets(embeddings_normalized, target).to(embeddings.device)
 
-        if embeddings_normalized.is_cuda:
-            triplets = triplets.cuda()
         if self.is_distance:
             ap_distances = (embeddings_normalized[triplets[:, 0]] - embeddings_normalized[triplets[:, 1]]).pow(2).sum(1)
             an_distances = (embeddings_normalized[triplets[:, 0]] - embeddings_normalized[triplets[:, 2]]).pow(2).sum(1)
@@ -53,4 +51,18 @@ class OnlineTripletLoss(nn.Module):
             ap_distances = (embeddings_normalized[triplets[:, 0]] * embeddings_normalized[triplets[:, 1]]).sum(1)
             an_distances = (embeddings_normalized[triplets[:, 0]] * embeddings_normalized[triplets[:, 2]]).sum(1)
             losses = 2*F.relu(an_distances - ap_distances + self.margin)
-        return losses.mean(), len(triplets)
+        return losses.mean()
+
+
+class FusionLoss(nn.Module):
+    def __init__(self, cls_loss, metric_loss, w_cls=1.0, w_metric=4.0):
+        super(FusionLoss, self).__init__()
+        self.w_cls = w_cls
+        self.w_metric = w_metric
+        self.cls_loss = cls_loss
+        self.metric_loss = metric_loss
+
+    def forward(self, inputs, labels):
+        features, logits = inputs
+        loss = self.w_cls * self.cls_loss(logits, labels) + self.w_metric * self.metric_loss(features, labels)
+        return loss

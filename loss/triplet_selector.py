@@ -5,7 +5,7 @@ import torch
 
 def pdist(vectors, is_distance=True):
     if is_distance:
-        # the embeddings are already l2-normalized, thus has norm 1
+        # The embeddings are already l2-normalized, thus has norm 1
         distance_matrix = - 2 * np.matmul(vectors, vectors.T) + 2.0
     else:
         # cosine similarity
