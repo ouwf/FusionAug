@@ -15,7 +15,7 @@ class ResNets(torch.nn.Module):
         elif backbone == 'resnet50':
             resnet = models.resnet50(pretrained=True)
         else:
-            ValueError(f'{backbone} is not supported')
+            raise ValueError(f'{backbone} is not supported')
 
         self.backbone = torch.nn.Sequential(*list(resnet.children())[:-1])
         if head_type == "cls_norm":

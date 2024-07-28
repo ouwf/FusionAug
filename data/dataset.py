@@ -34,7 +34,7 @@ class VeinDataset(data.Dataset):
                 # self.img_data.extend([self.img_data[i].transpose(Image.FLIP_TOP_BOTTOM) for i in np.arange(0, len(self.img_data))])
                 self.img_data.extend([self.img_data[i][::-1, :, :] for i in np.arange(0, len(self.img_data))])
             else:
-                ValueError(f"{inter_aug} is not a valid option.")
+                raise ValueError(f"{inter_aug} is not a valid option.")
             aug_classes = np.arange(self.class_num, self.class_num * 2).repeat(sample_per_class)
             self.labels = np.concatenate([self.labels, aug_classes])
             self.class_num = self.class_num * 2
@@ -97,7 +97,7 @@ def get_transforms(dataset, data_aug=True):
             transform_train.append(transforms.RandomPerspective(distortion_scale=0.3, p=0.9))
             transform_train.append(transforms.ColorJitter(brightness=0.7, contrast=0.7))
         else:
-            ValueError(f"Dataset {dataset} not supported!")
+            raise ValueError(f"Dataset {dataset} not supported!")
     transform_train.append(transforms.ToTensor())
     transform_train.append(normalize)
     transform_train = transforms.Compose(transform_train)

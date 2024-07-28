@@ -55,7 +55,7 @@ def main():
     if args.dataset_name.lower() == "fvusm":
         sample_per_class = 12
     else:
-        ValueError("Dataset %s not supported!" % args.dataset_name)
+        raise ValueError("Dataset %s not supported!" % args.dataset_name)
 
     transform_train, transform_test = get_transforms(args.dataset_name, args.intra_aug)
     trainset = VeinDataset(root=args.trainset, sample_per_class=sample_per_class, transform=transform_train, inter_aug=args.inter_aug)
