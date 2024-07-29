@@ -1,6 +1,6 @@
 # FusionAug-PyTorch
 
-> PyTorch implementation of [Fusion Loss and Inter-class Data Augmentation for Deep Finger Vein Feature Learning](https://www.sciencedirect.com/science/article/abs/pii/S0957417421000257?casa_token=3vLPMy3GobcAAAAA:yggNDxtgybur2OHa7VVb70Y34_WBJc6sIRe7gBpK9Pf3Ub3unob4H8fao50ugQHbUkDBivzCEw). A simple video demo is available at [youtube](https://www.youtube.com/watch?v=815MXXj2gtU), [bilibili]().
+> PyTorch implementation of [Fusion Loss and Inter-class Data Augmentation for Deep Finger Vein Feature Learning](https://www.sciencedirect.com/science/article/abs/pii/S0957417421000257?casa_token=3vLPMy3GobcAAAAA:yggNDxtgybur2OHa7VVb70Y34_WBJc6sIRe7gBpK9Pf3Ub3unob4H8fao50ugQHbUkDBivzCEw). A simple video demo is available at [youtube](https://www.youtube.com/watch?v=815MXXj2gtU), [bilibili](https://www.bilibili.com/video/BV1s5eZeEEtC/).
 
 ## Abstract
 Finger vein recognition (FVR) based on deep learning (DL) has gained rising attention in recent years. However, the performance of FVR is limited by the insufficient amount of finger vein training data and the weak generalization of learned features. To address these limitations and improve the performance, we propose a simple framework by jointly considering intensive data augmentation, loss function design and network architecture selection. Firstly, we propose a simple inter-class data augmentation technique that can double the number of finger vein training classes with new vein patterns via vertical flipping. Then, we combine it with conventional intra-class data augmentation methods to achieve highly diversified expansion, thereby effectively resolving the data shortage problem. In order to enhance the discrimination of deep features, we design a fusion loss by incorporating the classification loss and the metric learning loss. We find that the fusion of these two penalty signals will lead to a good trade-off between the intra-class similarity and inter-class separability, thereby greatly improving the generalization ability of learned features. We also investigate various network architectures for FVR application in terms of performances and model complexities. To examine the reliability and efficiency of our proposed framework, we implement a real-time FVR system to perform end-to-end verification in a near-realworld working condition. In challenging open-set evaluation protocol, extensive experiments conducted on three public finger vein databases and an in-house database confirm the effectiveness of the proposed method.
@@ -9,6 +9,7 @@ Finger vein recognition (FVR) based on deep learning (DL) has gained rising atte
 </div>
 
 ## Installation
+Clone the repo and run
 ```bash
 $ conda env create --file env.yml
 $ conda activate fusionaug
@@ -41,10 +42,9 @@ The original paper has employed a simplified evaluation protocol where the genui
 
 ## Acknowledgement
 * The copyright of the [FV-USM database](http://drfendi.com/fv_usm_database/) is owned by Dr. Bakhtiar Affendi Rosdi, School of Electrical and Electronic Engineering, USM.
-* This code is largely built upon several public projects, many thanks to the authors.
+* This code is inspired by and built upon several public projects, many thanks to the authors.
   * https://github.com/adambielski/siamese-triplet/tree/master
   * https://github.com/sthalles/PyTorch-BYOL/
-
 
 ## Citation
 ```bibtex
