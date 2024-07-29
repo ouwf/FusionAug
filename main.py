@@ -14,8 +14,8 @@ def parse_args():
     parser.add_argument('--trainset', type=str, help='train set path')
     parser.add_argument('--testset', type=str, help='test set path')
     parser.add_argument('--network', type=str, default='resnet18', help='name of the network: {resnet18, resnet34, resnet50}')
-    parser.add_argument('--load_from', type=str, default=None, help='load pretrained model')
     parser.add_argument('--head_type', type=str, default='cls_norm', help='the type of head: {cls_norm, cls}')
+    parser.add_argument('--load_from', type=str, default=None, help='load pretrained model')
     parser.add_argument('--loss', type=str, default='fusionloss', help="loss function: {softmax, cosface, tripletloss, fusionloss}")
     parser.add_argument("--intra_aug", action='store_true', help="apply intra-class data augmentation")
     parser.add_argument('--inter_aug', type=str, default=None, help="apply flipping-based inter-class data augmentation: {LR, TB}")
@@ -29,9 +29,9 @@ def parse_args():
     parser.add_argument('--k', type=int, default=4, help='randomly select k samples per class for a mini-batch')
     parser.add_argument('--hard_margin', type=float, default=0.2, help='hard_margin in triplet loss')
     parser.add_argument('--w_cls', type=float, default=1.0,
-                        help='weight factor of large margin cosine loss (cosface) in fusion loss')
+                        help='weight factor of classification loss (cosface) in fusion loss')
     parser.add_argument('--w_metric', type=float, default=4.0,
-                        help='weight factor of triplet loss in fusion loss')
+                        help='weight factor of metric learning loss (triplet loss) in fusion loss')
     parser.add_argument('--max_epoch', type=int, default=80, help='number of epochs')
     parser.add_argument('--batch_size', type=int, default=64, help='batch size')
     parser.add_argument('--seed', type=int, default=1, help='random seed for repeating results')
