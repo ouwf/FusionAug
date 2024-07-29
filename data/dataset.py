@@ -86,13 +86,14 @@ class BalancedBatchSampler(torch.utils.data.BatchSampler):
         return len(self.dataset) // self.batch_size
 
 
-def get_transforms(dataset, data_aug=True):
+def get_transforms(dataset, img_size, data_aug=True):
     # normalize to [-1, 1]
     normalize = transforms.Normalize(mean=[0.5, ], std=[0.5, ])
     transform_train = []
     if data_aug:
         if dataset.lower() == 'fvusm':
-            transform_train.append(transforms.RandomResizedCrop(size=(64, 144), scale=(0.5, 1.0), ratio=(2.25, 2.25)))
+            img_ratio = img_size[1] / img_size[0]
+            transform_train.append(transforms.RandomResizedCrop(size=(64, 144), scale=(0.5, 1.0), ratio=(img_ratio, img_ratio)))
             transform_train.append(transforms.RandomRotation(degrees=3))
             transform_train.append(transforms.RandomPerspective(distortion_scale=0.3, p=0.9))
             transform_train.append(transforms.ColorJitter(brightness=0.7, contrast=0.7))

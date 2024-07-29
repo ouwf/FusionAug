@@ -29,13 +29,13 @@ def parse_args():
     parser.add_argument('--k', type=int, default=4, help='randomly select k samples per class for a mini-batch')
     parser.add_argument('--hard_margin', type=float, default=0.2, help='hard_margin in triplet loss')
     parser.add_argument('--w_cls', type=float, default=1.0,
-                        help='weight factor of triplet loss in fusion loss')
+                        help='weight factor of large margin cosine loss (cosface) in fusion loss')
     parser.add_argument('--w_metric', type=float, default=4.0,
-                        help='weight factor of large margin cosine loss in fusion loss')
-    parser.add_argument('--max_epoch', type=int, default=80, help='margin')
+                        help='weight factor of triplet loss in fusion loss')
+    parser.add_argument('--max_epoch', type=int, default=80, help='number of epochs')
     parser.add_argument('--batch_size', type=int, default=64, help='batch size')
     parser.add_argument('--seed', type=int, default=1, help='random seed for repeating results')
-    parser.add_argument("--save_image", action='store_true', help="save the augmented image pairs during training")
+    parser.add_argument("--save_image", action='store_true', help="save the augmented images during training")
     parser.add_argument('--simple_eval', action='store_true', help="whether to use simplified evaluation protocol")
     args = parser.parse_args()
     return args
@@ -54,10 +54,11 @@ def main():
     print(f"Training with: {device}")
     if args.dataset_name.lower() == "fvusm":
         sample_per_class = 12
+        img_size = (64, 144)
     else:
         raise ValueError("Dataset %s not supported!" % args.dataset_name)
 
-    transform_train, transform_test = get_transforms(args.dataset_name, args.intra_aug)
+    transform_train, transform_test = get_transforms(args.dataset_name, img_size=img_size, data_aug=args.intra_aug)
     trainset = VeinDataset(root=args.trainset, sample_per_class=sample_per_class, transform=transform_train, inter_aug=args.inter_aug)
     if args.loss == 'tripletloss' or args.loss == 'fusionloss':
         train_batch_sampler = BalancedBatchSampler(trainset, n_classes=args.p, n_samples=args.k)
